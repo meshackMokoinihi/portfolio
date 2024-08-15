@@ -173,3 +173,17 @@
     border-width: 5px;
   }
   
+
+  @media (max-width: 420px) {
+  
+    .card-slider-item { width: 80%;}
+  }
+
+
+.slick-wrapper .home-insta{
+    width: 10%;
+    height: 10%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
