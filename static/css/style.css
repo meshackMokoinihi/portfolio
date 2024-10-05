@@ -69,8 +69,14 @@
     margin: 2rem 0;
     background: rgba(0, 0, 0, 0.096);
     border-radius: 33px;
-    box-shadow: 0 0 40px -10px #00fff2;
+    box-shadow: 0 0 40px -10px #001aff;
     
+  }
+
+
+  .features-section {
+    margin: 2rem 0;
+    border-radius: 33px;
   }
   
   .section-a .container {
