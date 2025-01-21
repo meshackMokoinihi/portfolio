@@ -25,180 +25,159 @@
 
     <!-- Navigation -->
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg bg-body-secondary sticky-top border border-primary rounded shadow-sm py-2" style="background-color: #f8f9fa;">
-  <div class="container-fluid">
-    <a class="navbar-brand font-weight-bold" href="index.html" style="font-weight: 700;">
-      <img src="static/images/logo.png" alt="My Portfolio" style="height: 60px; width: 60px;" >
-    </a>
+    <header>
+      <div class="container-fluid p-0" style="background-image: url(static/images/BACK.jpg); background-size: cover; background-position: center center; position: relative;">
+        <!-- Overlay for text readability -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.452); z-index: 1;"></div>
+        
+        <nav class="navbar navbar-expand-lg bg-body-secondary sticky-top border border-primary rounded shadow-sm py-2" style="background-color: rgba(255, 255, 255, 0.8); z-index: 2;">
+          <div class="container-fluid">
+            <a class="navbar-brand font-weight-bold" href="index.html" style="font-weight: 700;">
+              <img src="static/images/logo.png" alt="My Portfolio" style="height: 60px; width: 60px;">
+            </a>
+            <button 
+              class="navbar-toggler" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#navbarNavAltMarkup" 
+              aria-controls="navbarNavAltMarkup" 
+              aria-expanded="false" 
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav ms-auto">
+                <a class="nav-link active" aria-current="page" href="index.html" style="color: #007bff;">Home</a>
+                <a class="nav-link" href="about.html" style="color: #007bff;">About</a>
+                <a class="nav-link" href="features.html" style="color: #007bff;">Features</a>
+                <a class="nav-link" href="price.html" style="color: #007bff;">Pricing</a>
+                <a class="nav-link" href="contact.html" style="color: #0088ff;">Contact Me</a>
+              </div>
+            </div>
+          </div>
+        </nav>
     
-    <!-- <a class="navbar-brand font-weight-bold" href="" style="font-weight: 700; color: #007bff;">MyPortfolio</a> -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link active" aria-current="page" href="index.html" style="color: #007bff;">Home</a>
-        <a class="nav-link" href="features.html" style="color: #007bff;">Features</a>
-        <a class="nav-link" href="price.html" style="color: #007bff;">Pricing</a>
-        <a class="nav-link" href="contact.html"  style="color: #0088ff;">Contact Me</a>
+        <div class="container text-center py-5" style="position: relative; z-index: 2;"> 
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <img src="static/images/logo.png" alt="Profile Image" class="rounded-circle img-fluid shadow mb-4" style="width: 300px; height: 300px; object-fit: cover;border: 5px solid #4f46e5; ">
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-8 text-center"> 
+              <h1 class="font-weight-bold mb-3 text-light">Hello, I'm T-Development!</h1>
+              <p class="lead text-light">I turn <span class="text-primary">ideas</span> into <span class="text-success">code</span>, one line at a time.</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</nav>
+    </header>
+    
 
 
-
-          <!-- Showcase -->
-<section class="section-a py-5 " style="background-color: #f4f4f4;">
-  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-    <!-- Text Content -->
-    <div class="text-content mb-4 mb-md-0" style="flex: 1; padding-right: 30px;">
-      <h1 class="text-center text-md-start font mb-3" style="font-weight: 700; color: #333;">
-        <span id="greeting" style="font-weight: 700;">Hello, my name is Thabo Mokoinihi, and</span>
-        <span class="interactive-heading" style="color: #007bff; font-weight: 700;"> I'm a Software Developer.</span>
-      </h1>
-      <p class="lead" style="color: #555; line-height: 1.8;">
-        I have completed my studies with a focus on software engineering, specializing in Python and Java.
-         I possess a solid foundation in computer science, programming, and software development. 
-        I am proficient in Python and Java, understand software engineering principles and best practices, and am eager 
-        to contribute my knowledge and skills to enhance my professional expertise. I am open to exploring new 
-        technologies and frameworks to broaden my skill set and stay updated with industry trends.
-      </p>
-      <a href="#" class="btn btn-primary" style="padding: 10px 25px; font-weight: 600; background-color: #007bff; border: none; border-radius: 50px; transition: background-color 0.3s ease;">
-        Read More
-      </a>
-    </div>
-
-    <!-- Profile Image -->
-    <img src="static/images/thabo.jpg" alt="Profile Image" class="Profile rounded-circle img-fluid shadow" style="width: 250px; height: 250px; object-fit: cover;">
-  </div>
-</section>
-
-<!-- Typing Effect for Interactive Heading -->
-<script>
-  const greetings = document.getElementById('greeting');
-  const interactiveHeading = document.querySelector('.interactive-heading');
-  const texts = ['a Creative Thinker.', 'a Python Enthusiast.', 'a Web Designer.'];
-  let index = 0;
-  
-  function typeEffect() {
-    interactiveHeading.textContent = texts[index];
-    index = (index + 1) % texts.length; // Loop through the texts
-  }
-
-  setInterval(typeEffect, 4000); // Change text every 2 seconds
-</script>
 
 
 
 
 <!-- Card Slider Section -->
-<section class="slider-section py-5 " style="background-color: #fff; border-radius:30px;">
+<section class="slider-section py-5 bg-light rounded-4">
   <div class="container">
-    <h2 class="text-center font-weight-bold mb-5" style="color: #000000; font-weight:700;">Building Solutions</h2>
+    <h2 class="text-center fw-bold mb-5 text-dark">Building Solutions</h2>
 
-    <!-- Multi-Card Carousel -->
-    <div id="multiCardCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-
-        <div class="carousel-item active">
-          <div class="row">
-            <!-- First Card -->
-            <div class="col-md-4">
-              <div class="card text-center">
-                <img src="static/images/python.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Python Logo" style="width: 100px; height: 100px; object-fit: cover;">
-                <div class="card-body">
-                  <h5 class="card-title">Python</h5>
-                  <p class="card-text">A versatile language used in web development, data science, and automation.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Second Card -->
-            <div class="col-md-4">
-              <div class="card text-center">
-                <img src="static/images/java.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Java Logo" style="width: 100px; height: 100px; object-fit: cover;">
-                <div class="card-body">
-                  <h5 class="card-title">Java</h5>
-                  <p class="card-text">A powerful object-oriented language widely used for building enterprise solutions.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Third Card -->
-            <div class="col-md-4">
-              <div class="card text-center">
-                <img src="static/images/javascript.png" class="card-img-top rounded-circle mx-auto mt-4" alt="JavaScript Logo" style="width: 100px; height: 100px; object-fit: cover;">
-                <div class="card-body">
-                  <h5 class="card-title">JavaScript</h5>
-                  <p class="card-text">The language of the web, powering dynamic websites and modern web apps.</p>
-                </div>
-              </div>
+    <!-- Swiper Section -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <!-- Card Template -->
+        <div class="swiper-slide">
+          <div class="card h-100 text-center border-0 shadow">
+            <img src="static/images/python.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Python Logo" style="width: 100px; height: 100px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">Python</h5>
+              <p class="card-text text-muted">A versatile language used in web development, data science, and automation.</p>
             </div>
           </div>
         </div>
 
-        <div class="carousel-item">
-          <div class="row">
-            <!-- Fourth Card -->
-            <div class="col-md-4">
-              <div class="card text-center">
-                <img src="static/images/html.png" class="card-img-top rounded-circle mx-auto mt-4" alt="HTML Logo" style="width: 100px; height: 100px; object-fit: cover;">
-                <div class="card-body">
-                  <h5 class="card-title">HTML</h5>
-                  <p class="card-text">The standard markup language for creating web pages and web applications.</p>
-                </div>
-              </div>
+        <div class="swiper-slide">
+          <div class="card h-100 text-center border-0 shadow">
+            <img src="static/images/java.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Java Logo" style="width: 100px; height: 100px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">Java</h5>
+              <p class="card-text text-muted">A powerful object-oriented language widely used for building enterprise solutions.</p>
             </div>
+          </div>
+        </div>
 
-                        <!-- Sixth Card -->
-                        <div class="col-md-4">
-                          <div class="card text-center">
-                            <img src="static/images/flutter.png" class="card-img-top rounded-circle mx-auto mt-4" alt="Node.js Logo" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="card-body">
-                              <h5 class="card-title">flutter</h5>
-                              <p class="card-text">an open-source UI software development kit created by Google. It can be used to develop cross platform applications from a single codebase for the web, Fuchsia, Android, iOS, Linux, macOS, and Windows.</p>
-                            </div>
-                          </div>
-                        </div>
-
-            <!-- Fifth Card -->
-            <div class="col-md-4">
-              <div class="card text-center">
-                <img src="static/images/Bootstrap_logo.svg.png" class="card-img-top rounded-circle mx-auto mt-4" alt="CSS Logo" style="width: 100px; height: 100px; object-fit: cover;">
-                <div class="card-body">
-                  <h5 class="card-title">Bootstrap</h5>
-                  <p class="card-text">A style framework used for describing the presentation of a document written in HTML.</p>
-                </div>
-              </div>
+        <div class="swiper-slide">
+          <div class="card h-100 text-center border-0 shadow">
+            <img src="static/images/javascript.png" class="card-img-top rounded-circle mx-auto mt-4" alt="JavaScript Logo" style="width: 100px; height: 100px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">JavaScript</h5>
+              <p class="card-text text-muted">The language of the web, powering dynamic websites and modern web apps.</p>
             </div>
+          </div>
+        </div>
 
+        <div class="swiper-slide">
+          <div class="card h-100 text-center border-0 shadow">
+            <img src="static/images/html.png" class="card-img-top rounded-circle mx-auto mt-4" alt="HTML Logo" style="width: 100px; height: 100px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">HTML</h5>
+              <p class="card-text text-muted">The standard markup language for creating web pages and web applications.</p>
+            </div>
+          </div>
+        </div>
 
+        <div class="swiper-slide">
+          <div class="card h-100 text-center border-0 shadow">
+            <img src="static/images/flutter.png" class="card-img-top rounded-circle mx-auto mt-4" alt="Flutter Logo" style="width: 100px; height: 100px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">Flutter</h5>
+              <p class="card-text text-muted">A UI toolkit for building cross-platform apps from a single codebase.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="card h-100 text-center border-0 shadow">
+            <img src="static/images/Bootstrap_logo.svg.png" class="card-img-top rounded-circle mx-auto mt-4" alt="Bootstrap Logo" style="width: 100px; height: 100px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">Bootstrap</h5>
+              <p class="card-text text-muted">A CSS framework for building responsive and modern web interfaces.</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Carousel Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#multiCardCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#multiCardCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+      <!-- Swiper Navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
   </div>
 </section>
+
+<!-- Swiper Styles and Script -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- Swiper Configuration -->
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      576: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+</script>
 
     
 
@@ -212,7 +191,6 @@
 <section class="features-section py-5" style="background-color: #f8f9fa;">
   <div class="container">
     <h2 class="text-center font-weight-bold mb-5" style="color: #000000; font-weight:700;">My Projects</h2>
-
     <!-- Project Slider (Carousel) -->
     <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -284,16 +262,7 @@
     </div>
   </div>
 
-      <!-- Carousel Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+
   </div>
   
 

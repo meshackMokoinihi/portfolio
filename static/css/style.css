@@ -114,7 +114,7 @@
   }
 
   .card:hover {
-    background-color: #f4f4f4;
+    background-color: #007bffc7;
     color: #000000;
     transform: scale(1.05);
     box-shadow: #707070 0px 30px 60px -12px inset, rgb(255, 255, 255) 0px 18px 36px -18px inset;
@@ -124,14 +124,14 @@
  
 
   .btn-primary {
-    background-color: #007bff;
+    background-color: #007bff8e;
     border: none;
     border-radius: 50px;
     padding: 10px 20px;
   }
 
   .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #007bff;
     
 
   }
@@ -183,7 +183,6 @@
   
   label {
     display: block;
-    background: #a3a6a7;
     text-align: center;
     /* margin-top: 2px; */
     font-size: 25px;
