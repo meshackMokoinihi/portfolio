@@ -19,6 +19,60 @@
 
     <link rel="stylesheet" type="text/css" href="static/css/nav.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.shopify.com/s/files/1/2979/3338/files/UGC-style.css" />
+    <style>
+      slideshow-container {
+            width: 90%;
+            max-width: 1200px;
+            overflow: hidden;
+            position: relative;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .slideshow-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .slideshow-logo img {
+            width: 150px;
+        }
+
+        .slideshow {
+            display: flex;
+            gap: 40px;
+            animation: scroll 20s linear infinite;
+        }
+
+        .slide {
+            flex: 0 0 auto;
+            text-align: center;
+        }
+
+        .slide img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .slide p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+
+    </style>
   </head>
   <!-- data-bs-theme="dark" -->
   <body data-bs-theme="dark">
@@ -61,7 +115,7 @@
         <div class="container text-center py-5" style="position: relative; z-index: 2;"> 
           <div class="row justify-content-center">
             <div class="col-md-6">
-              <img src="static/images/logo.png" alt="Profile Image" class="rounded-circle img-fluid shadow mb-4" style="width: 300px; height: 300px; object-fit: cover;border: 5px solid #4f46e5; ">
+              <img src="static/images/logo.png" alt="Profile Image" class="rounded-circle img-fluid shadow mb-4" style="width: 300px; height: 300px; object-fit: cover;border: 9px solid #4f46e5; ">
             </div>
           </div>
           <div class="row justify-content-center">
@@ -81,17 +135,17 @@
 
 
 <!-- Card Slider Section -->
-<section class="slider-section py-5 bg-light rounded-4">
+<section class="slider-section py-5 bg-dark rounded-4">
   <div class="container">
-    <h2 class="text-center fw-bold mb-5 text-dark">Building Solutions</h2>
+    <h2 class="text-center fw-bold mb-5 text-light">Building Solutions</h2>
 
     <!-- Swiper Section -->
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
         <!-- Card Template -->
         <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow">
-            <img src="static/images/python.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Python Logo" style="width: 100px; height: 100px; object-fit: cover;">
+          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
+            <img src="static/images/python.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Python Logo" style="width: 100px; height: 100px; object-fit: cover; border: 5px solid #4f46e5;">
             <div class="card-body">
               <h5 class="card-title fw-semibold">Python</h5>
               <p class="card-text text-muted">A versatile language used in web development, data science, and automation.</p>
@@ -100,8 +154,8 @@
         </div>
 
         <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow">
-            <img src="static/images/java.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Java Logo" style="width: 100px; height: 100px; object-fit: cover;">
+          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
+            <img src="static/images/java.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Java Logo" style="width: 100px; height: 100px; object-fit: cover; border: 5px solid #4f46e5;">
             <div class="card-body">
               <h5 class="card-title fw-semibold">Java</h5>
               <p class="card-text text-muted">A powerful object-oriented language widely used for building enterprise solutions.</p>
@@ -110,8 +164,8 @@
         </div>
 
         <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow">
-            <img src="static/images/javascript.png" class="card-img-top rounded-circle mx-auto mt-4" alt="JavaScript Logo" style="width: 100px; height: 100px; object-fit: cover;">
+          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
+            <img src="static/images/javascript.png " class="card-img-top rounded-circle mx-auto mt-4" alt="JavaScript Logo" style="width: 100px; height: 100px; object-fit: cover; border: 5px solid #4f46e5;">
             <div class="card-body">
               <h5 class="card-title fw-semibold">JavaScript</h5>
               <p class="card-text text-muted">The language of the web, powering dynamic websites and modern web apps.</p>
@@ -120,8 +174,8 @@
         </div>
 
         <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow">
-            <img src="static/images/html.png" class="card-img-top rounded-circle mx-auto mt-4" alt="HTML Logo" style="width: 100px; height: 100px; object-fit: cover;">
+          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
+            <img src="static/images/html.png" class="card-img-top rounded-circle mx-auto mt-4" alt="HTML Logo" style="width: 100px; height: 100px; object-fit: cover;border: 5px solid #4f46e5;">
             <div class="card-body">
               <h5 class="card-title fw-semibold">HTML</h5>
               <p class="card-text text-muted">The standard markup language for creating web pages and web applications.</p>
@@ -130,8 +184,8 @@
         </div>
 
         <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow">
-            <img src="static/images/flutter.png" class="card-img-top rounded-circle mx-auto mt-4" alt="Flutter Logo" style="width: 100px; height: 100px; object-fit: cover;">
+          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
+            <img src="static/images/flutter.png" class="card-img-top rounded-circle mx-auto mt-4" alt="Flutter Logo" style="width: 100px; height: 100px; object-fit: cover;border: 5px solid #4f46e5;">
             <div class="card-body">
               <h5 class="card-title fw-semibold">Flutter</h5>
               <p class="card-text text-muted">A UI toolkit for building cross-platform apps from a single codebase.</p>
@@ -140,8 +194,8 @@
         </div>
 
         <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow">
-            <img src="static/images/Bootstrap_logo.svg.png" class="card-img-top rounded-circle mx-auto mt-4" alt="Bootstrap Logo" style="width: 100px; height: 100px; object-fit: cover;">
+          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
+            <img src="static/images/Bootstrap_logo.svg.png" class="card-img-top rounded-circle mx-auto mt-4" alt="Bootstrap Logo" style="width: 100px; height: 100px; object-fit: cover;border: 5px solid #4f46e5;">
             <div class="card-body">
               <h5 class="card-title fw-semibold">Bootstrap</h5>
               <p class="card-text text-muted">A CSS framework for building responsive and modern web interfaces.</p>
@@ -155,6 +209,89 @@
       <div class="swiper-button-prev"></div>
     </div>
   </div>
+
+  <div class="slideshow-container">
+
+    <div class="slideshow">
+        <div class="slide">
+            <img src="static/images/python.svg" alt="Brand 1" >
+            <p class="text-light">Python programming Language</p>
+        </div>
+        <div class="slide">
+            <img src="static/images/java.svg" alt="Brand 2">
+            <p class="text-light">Java</p>
+        </div>
+        <div class="slide">
+            <img src="static/images/javascript.png" alt="Brand 3" >
+            <p class="text-light">JavaScript</p>
+        </div>
+        <div class="slide">
+            <img src="static/images/html.png" alt="Brand 4">
+            <p class="text-light">HTML</p>
+        </div>
+        <div class="slide">
+            <img src="static/images/flutter.png" alt="Brand 5">
+            <p class="text-light">Flutter</p>
+        </div>
+        <div class="slide">
+          <img src="static/images/Bootstrap_logo.svg.png" alt="Brand 6">
+          <p class="text-light">Bootstrap</p>
+      </div>
+        
+        <!-- Repeat slides to create infinite scroll illusion -->
+        <div class="slide">
+          <img src="static/images/python.svg" alt="Brand 1">
+          <p class="text-light">Python programming Language</p>
+      </div>
+      <div class="slide">
+          <img src="static/images/java.svg" alt="Brand 2">
+          <p class="text-light">Java</p>
+      </div>
+      <div class="slide">
+          <img src="static/images/javascript.png" alt="Brand 3">
+          <p class="text-light">JavaScript</p>
+      </div>
+      <div class="slide">
+          <img src="static/images/html.png" alt="Brand 4">
+          <p class="text-light">HTML</p>
+      </div>
+      <div class="slide">
+          <img src="static/images/flutter.png" alt="Brand 5">
+          <p class="text-light">Flutter</p>
+      </div>
+      <div class="slide">
+        <img src="static/images/Bootstrap_logo.svg.png" alt="Brand 6">
+        <p class="text-light">Bootstrap</p>
+    </div>
+
+     <!-- Repeat slides to create infinite scroll illusion -->
+     <div class="slide">
+      <img src="static/images/python.svg" alt="Brand 1">
+      <p class="text-light">Python programming Language</p>
+  </div>
+  <div class="slide">
+      <img src="static/images/java.svg" alt="Brand 2">
+      <p class="text-light">Java</p>
+  </div>
+  <div class="slide">
+      <img src="static/images/javascript.png" alt="Brand 3">
+      <p class="text-light">JavaScript</p>
+  </div>
+  <div class="slide">
+      <img src="static/images/html.png" alt="Brand 4">
+      <p class="text-light">HTML</p>
+  </div>
+  <div class="slide">
+      <img src="static/images/flutter.png" alt="Brand 5">
+      <p class="text-light">Flutter</p>
+  </div>
+  <div class="slide">
+    <img src="static/images/Bootstrap_logo.svg.png" alt="Brand 6">
+    <p class="text-light">Bootstrap</p>
+</div>
+
+    </div>
+</div>
 </section>
 
 <!-- Swiper Styles and Script -->
@@ -183,90 +320,90 @@
 
     
 
+
   
 
 
 
-    <!-- Project Slider Section -->
-<section class="features-section py-5" style="background-color: #f8f9fa;">
-  <div class="container">
-    <h2 class="text-center font-weight-bold mb-5" style="color: #000000; font-weight:700;">My Projects</h2>
-    <!-- Project Slider (Carousel) -->
-    <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <!-- Slide 1 -->
 
-        <div class="carousel-item active">
-          <div class="row">
-            <div class="col-md-4 mx-auto">
-              <div class="card text-center border-0 shadow-sm">
-                <img src="static/images/ds.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Image" style="width: 140px; height: 140px; object-fit: cover;">
-                <div class="card-body">
-                  <h5 class="card-title">DurableStitch pyt(LTD)</h5>
-                  <p class="card-text">A web-based platform for managing tasks and team collaborations.</p>
-                  <a href="https://www.durablestitch.com/" class="btn btn-primary">View Project</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-          <div class="row">
-            <div class="col-md-4 mx-auto">
-              <div class="card text-center border-0 shadow-sm">
-                <img src="static/images/ds-E.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 2 Image" style="width: 140px; height: 140px; object-fit: cover;">
-                <div class="card-body">
-                  <h5 class="card-title">DurableStitch E-commerce</h5>
-                  <p class="card-text">An e-commerce application with a responsive user interface.</p>
-                  <a href="https://www.durablestitch.store/" class="btn btn-primary">View Project</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item">
-          <div class="row">
-            <div class="col-md-4 mx-auto">
-              <div class="card text-center border-0 shadow-sm">
-                <img src="static/images/bono.webp" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 3 Image" style="width: 140px; height: 140px; object-fit: cover;">
-                <div class="card-body">
-                  <h5 class="card-title">Bonovitta Business Solutions pty</h5>
-                  <p class="card-text">A mobile app for tracking fitness activities and goals.</p>
-                  <a href="https://www.bonovitta.co.za/" class="btn btn-primary">View Project</a>
-                </div>
-              </div>
-            </div>
+<section id="projects" class="py-5">
+  <div class="container" >
+    <h2 class="text-center fw-bold mb-5 text-light" >My Previous Projects</h2>
+    <div class="row ">
+      <!-- Project 1 -->
+      <div class="col-md-4 mb-4" >
+        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
+          <img src="static/images/ds-E.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5;">
+          <div class="card-body">
+            <h5 class="card-title">DurableStitch Online Store</h5>
+            <p class="card-text text-center">A web application that lets users upload, customize, and preview T-shirt designs in 3D..</p>
+            <p class="text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript, Python, Flask, SQLAlchemy</p>
+            <a href="project1-link.html" class="btn btn-primary justify-content-center d-flex">View Project</a>
           </div>
         </div>
       </div>
-
-
-    <!-- Slide 4 -->
-    <div class="carousel-item">
-      <div class="row">
-        <div class="col-md-4 mx-auto">
-          <div class="card text-center border-0 shadow-sm">
-            <img src="static/images/africa.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 3 Image" style="width: 140px; height: 140px; object-fit: cover;">
-            <div class="card-body">
-              <h5 class="card-title">AficaHolidayHome</h5>
-              <p class="card-text">A mobile app for tracking fitness activities and goals.</p>
-              <a href="https://www.africaholidayhome.co.za/" class="btn btn-primary">View Project</a>
-            </div>
+      <!-- Project 2 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
+          <img src="static/images/bono.webp"class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5;">
+          <div class="card-body">
+            <h5 class="card-title text-center">Bonovitta Business Solutions (pty) ltd</h5>
+            <p class="card-text">Short description of the project. Highlight the main features or goals.</p>
+            <p class="text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+            <a href="project2-link.html" class="btn btn-primary justify-content-center d-flex">View Project</a>
           </div>
         </div>
       </div>
+      <!-- Project 3 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
+          <img src="static/images/africa.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5;">
+          <div class="card-body">
+            <h5 class="card-title text-center">AficaHolidayHome</h5>
+            <p class="card-text"> A web application that allows users to check room availability, book and pay online, with an admin page for managing bookings.</p>
+            <p class="text-muted"><strong>Technologies:</strong> Python, Flask, Html, css, JavaScript, bootstrap</p>
+            <a href="project3-link.html" class="btn btn-primary justify-content-center d-flex">View Project</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
+          <img src="static/images/ds.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5;">
+          <div class="card-bodytext-center">
+            <h5 class="card-title text-center">DurableStitch (pyt) ltd</h5>
+            <p class="card-text">A website that tells user about the company.</p>
+            <p class="text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+            <a href="project2-link.html" class="btn btn-primary justify-content-center d-flex">View Project</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
+          <img src="static/images/logo.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5;">
+          <div class="card-body">
+            <h5 class="card-title text-center" >T-Convertor</h5>
+            <p class="card-text">A web app that forcuses on document manipulation like coverting images to pdf, pdf to docx etx</p>
+            <p class="text-muted"><strong>Technologies:</strong> Python, Flask,HTML, CSS, JavaScript</p>
+            <a href="project2-link.html" class="btn btn-primary justify-content-center d-flex">View Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <img src="static/images/bono.webp" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Bonovitta Business Solutions pty</h5>
+            <p class="card-text text-center">Short description of the project. Highlight the main features or goals.</p>
+            <p class="text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+            <a href="project2-link.html" class="btn btn-primary">View Project</a>
+          </div>
+        </div>
+      </div> -->
     </div>
   </div>
-
-
-  </div>
-  
-
 </section>
+
 
 
     <footer class="bg-dark text-light text-center py-3">
