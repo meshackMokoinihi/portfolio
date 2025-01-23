@@ -95,7 +95,8 @@ img {
 .card:hover {
   background-color: rgba(0, 123, 255, 0.733);
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 60 10px 20px rgb(255, 255, 255);
+  box-shadow: rgb(255, 255, 255) 0px 20px 30px -10px;
 }
 
 /* Buttons */
