@@ -358,7 +358,7 @@
             <h5 class="card-title text-center">Bonovitta Business Solutions (pty) ltd</h5>
             <p class="card-text text-center">Short description of the project. Highlight the main features or goals.</p>
             <p class="text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
-            <a href="https://bonovitta.co.za" class="btn btn-primary justify-content-center d-flex">View Project</a>
+            <a href="https://bonovitta.netlify.app" class="btn btn-primary justify-content-center d-flex">View Project</a>
           </div>
         </div>
       </div>
@@ -387,15 +387,40 @@
       </div>
       <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm" style="border-radius: 60px;">
-          <img src="static/images/logo.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5;">
-          <div class="card-body">
-            <h5 class="card-title text-center" >T-Convertor</h5>
-            <p class="card-text text-center">A web app that forcuses on document manipulation like coverting images to pdf, pdf to docx etx</p>
-            <p class="text-muted"><strong>Technologies:</strong> Python, Flask,HTML, CSS, JavaScript</p>
-            <a href="project2-link.html" class="btn btn-primary justify-content-center d-flex">View Project</a>
-          </div>
+            <img src="static/images/logo.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail"
+                style="width: 140px; height: 140px; object-fit: cover; border: 5px solid #4f46e5;">
+            <div class="card-body text-center">
+                <h5 class="card-title">T-Convertor</h5>
+                <p class="card-text">A web app that focuses on document manipulation like converting images to PDF, PDF to DOCX, etc.</p>
+                <p class="text-muted"><strong>Technologies:</strong> Python, Flask, HTML, CSS, JavaScript</p>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+                        View Project
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="comingSoonModal" tabindex="-1" aria-labelledby="comingSoonModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="comingSoonModalLabel">Coming Soon!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="static/images/logo.png" alt="Coming Soon" style="width: 100px;">
+                    <p class="mt-3">This feature is under development. Stay tuned!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
       <!-- <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
           <img src="static/images/bono.webp" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;">
