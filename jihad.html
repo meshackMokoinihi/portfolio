@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jihad Quffa | Graphic Designer</title>
+        <link
+    rel="icon"
+    href="static/images/icon.png"
+    type="image/icon type"
+  />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #8A2BE2; /* Deeper, rich purple */
+            --secondary-cyan: #00FFFF; /* Bright cyan */
+            --accent-pink: #FF69B4;    /* Vibrant hot pink */
+            --dark-background: #0D0D1A; /* Very dark blue-black */
+            --light-text: #E0E0EB;     /* Soft off-white */
+            --card-background: #1A1A2C; /* Slightly lighter dark for cards/sections */
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'anton', sans-serif;
+            background-color: var(--dark-background);
+            color: var(--light-text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Modern Navbar */
+        .navbar {
+            background: rgba(13, 13, 26, 0.88);
+            backdrop-filter: blur(15px);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease-in-out;
+            z-index: 1000; /* Ensure navbar is always on top */
+        }
+
+        .navbar.scrolled {
+            padding: 0.7rem 0;
+            background: rgba(13, 13, 26, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            font-family: 'anton', sans-serif;
+            font-weight: 800;
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            margin: 0 0.8rem;
+            position: relative;
+            color: var(--light-text) !important;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -7px;
+            left: 0;
+            background: var(--accent-pink);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+            background: var(--secondary-cyan);
+        }
+        
+        .nav-link.active {
+            color: var(--secondary-cyan) !important;
+        }
+
+        .navbar-toggler {
+            border-color: var(--border-color);
+            padding: 0.25rem 0.75rem;
+            font-size: 1.25rem;
+            line-height: 1;
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            transition: box-shadow 0.15s ease-in-out;
+        }
+        .navbar-toggler-icon {
+            color: var(--light-text);
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            vertical-align: middle;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            /* Custom hamburger icon color via SVG filter */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28224, 224, 235, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        /* Override Bootstrap's default focus outline for toggler */
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(0, 255, 255, 0.25);
+            outline: 0;
+        }
+
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px; /* Account for fixed navbar */
+            position: relative;
+            z-index: 1; /* Ensure content is above background elements */
+            /* Background image styles */
+            background-image: url('static/images/Screenshot\ 2025-06-25\ 135311.png'); /* Abstract waves/lines */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Overlay to control image opacity */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(13, 13, 26, 0.7); /* Dark overlay */
+            z-index: 0; /* Behind content but above the image itself */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: 'anton', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 1.8rem;
+            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink), var(--secondary-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* Typing Animation properties */
+            overflow: hidden; /* Ensures the text is hidden before typing */
+            white-space: nowrap; /* Keeps text on a single line */
+            border-right: 3px solid var(--secondary-cyan); /* Cursor effect */
+            animation: 
+                typing 3.5s steps(30, end) forwards,
+                blink-caret 0.75s step-end infinite;
+            /* Ensure the text gradient is visible on top of the typing animation */
+            -webkit-text-fill-color: transparent; /* Needed for gradient with typing */
+            background-clip: text;
+            padding-bottom: 5px;
+        }
+        
+        /* Apply gradient shift after typing finishes */
+        .hero-title.typed {
+            animation: gradient-shift 10s ease infinite alternate;
+        }
+
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--secondary-cyan); }
+        }
+
+        /* Adjust gradient animation to play independently or remove if typing is primary */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(224, 224, 235, 0.85);
+            max-width: 650px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            animation: float 6s ease-in-out infinite, fadeIn 1s ease 0.8s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid var(--card-background);
+            box-shadow: 0 0 0 5px var(--primary-purple),
+                        0 0 80px rgba(138, 43, 226, 0.4);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-image:hover {
+            box-shadow: 0 0 0 6px var(--secondary-cyan),
+                        0 0 100px rgba(0, 255, 255, 0.7);
+            transform: scale(1.02);
+        }
+
+        /* Pulsing border effect */
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--primary-purple), var(--secondary-cyan)) border-box;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) padding-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: pulse-border 2s infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                border-color: var(--primary-purple);
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            100% {
+                border-color: var(--secondary-cyan);
+                opacity: 1;
+                transform: scale(1.03);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Design Elements */
+        .design-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Ensure icons are above the background image overlay */
+            pointer-events: none; /* Allow clicks through elements */
+            overflow: hidden;
+        }
+
+        .design-element {
+            position: absolute;
+            font-size: 1.2rem; /* Decreased size */
+            color: rgb(0, 255, 255); /* Increased opacity for more glow */
+            animation: float-around 30s linear infinite;
+            opacity: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6); /* More pronounced glow */
+        }
+
+        .design-element:nth-child(even) {
+            color: rgba(137, 43, 226, 0.774); /* Increased opacity for purple */
+            animation-duration: 25s;
+            text-shadow: 0 0 10px rgba(137, 43, 226, 0.753); /* More pronounced glow */
+        }
+
+        @keyframes float-around {
+            0% {
+                transform: translate(calc(var(--rand-x) * 1vw), calc(var(--rand-y) * 1vh)) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.3; } /* Increased peak opacity */
+            90% { opacity: 0.3; } /* Increased peak opacity */
+            100% {
+                transform: translate(calc(var(--rand-x-end) * 1vw), calc(var(--rand-y-end) * 1vh)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
+            border: none;
+            padding: 1.1rem 3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 12px 35px rgba(138, 43, 226, 0.4);
+            z-index: 1; /* Ensure button is above other elements */
+        }
+
+        .cta-button:hover {
+            transform: translateY(-7px) scale(1.02);
+            box-shadow: 0 18px 45px rgba(138, 43, 226, 0.6);
+            background: linear-gradient(45deg, var(--accent-pink), var(--secondary-cyan));
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.7s ease-in-out;
+            z-index: 0;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            #hero {
+                text-align: center;
+            }
+            .hero-title {
+                font-size: 4rem;
+            }
+            .hero-subtitle {
+                font-size: 1.3rem;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-image-container {
+                width: 300px;
+                height: 300px;
+                margin-top: 3rem;
+            }
+            .navbar-nav {
+                background-color: var(--dark-background);
+                padding: 15px;
+                border-radius: 8px;
+                margin-top: 10px;
+            }
+            .nav-link {
+                margin: 0.5rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+            .hero-image-container {
+                width: 250px;
+                height: 250px;
+            }
+            .cta-button {
+                padding: 0.9rem 1.2rem;
+                font-size: 1rem;
+            }
+            /* NEW: Reorder columns for mobile */
+            .hero-content {
+                order: 2;
+                margin-top: 2rem;
+            }
+            .hero-image-container {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cta-button {
+                width: 60%;
+                text-align: center;
+            }
+            .navbar-brand {
+                font-size: 1.6rem;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .hero-image-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Jihad Quffa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="background-overlay"></div> 
+        <div class="design-elements" id="design-elements"></div>
+        
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-7 order-lg-1 order-2">
+                    <div class="hero-content">
+                        <h1 class="hero-title" id="heroTitle"><br class="d-none d-md-block">Graphic Designer</h1>
+                        <!-- <p class="hero-subtitle">I craft meaningful digital experiences that connect brands with their audience through strategic, user-centered design solutions.</p> -->
+                        <a href="index.html" class="btn cta-button">
+                            <i class="fas fa-arrow-right me-2"></i> Explore My Work
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center mt-5 mt-lg-0 order-lg-2 order-1">
+                    <div class="hero-image-container">
+                        <img src="static/images/jihad.jpg" 
+                            alt="Jihad" class="hero-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').classList.add('scrolled');
+            } else {
+                document.querySelector('.navbar').classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for hero button
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const offsetPosition = targetElement.offsetTop - navbarHeight;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        });
+
+        // Design elements animation
+        const designIcons = [
+            'fa-bezier-curve', 'fa-vector-square', 'fa-palette', 'fa-fill-drip',
+            'fa-ruler-combined', 'fa-drafting-compass', 'fa-pen-nib', 'fa-pencil-ruler',
+            'fa-layer-group', 'fa-lightbulb', 'fa-adjust', 'fa-shapes', 'fa-laptop-code'
+        ];
+
+        function createDesignElements() {
+            const container = document.getElementById('design-elements');
+            const count = 30; // More elements for a richer background
+            
+            for (let i = 0; i < count; i++) {
+                const element = document.createElement('div');
+                element.className = 'design-element fas ' + 
+                    designIcons[Math.floor(Math.random() * designIcons.length)];
+                
+                // Random start and end positions within a wider range
+                const startX = Math.random() * 120 - 10; // -10vw to 110vw
+                const startY = Math.random() * 120 - 10; // -10vh to 110vh
+                const endX = Math.random() * 120 - 10;
+                const endY = Math.random() * 120 - 10;
+                
+                element.style.setProperty('--rand-x', startX);
+                element.style.setProperty('--rand-y', startY);
+                element.style.setProperty('--rand-x-end', endX);
+                element.style.setProperty('--rand-y-end', endY);
+
+                element.style.left = startX + 'vw';
+                element.style.top = startY + 'vh';
+                element.style.fontSize = (Math.random() * 1.5 + 1.2) + 'rem'; // Vary font size
+                element.style.animationDuration = (Math.random() * 20 + 25) + 's'; // Slower, varied animation
+                element.style.animationDelay = (Math.random() * -15) + 's'; // Negative delay to start at different points
+                
+                container.appendChild(element);
+            }
+        }
+
+        // Initialize and continuously generate elements
+        document.addEventListener('DOMContentLoaded', function() {
+            createDesignElements();
+
+            // Typing animation trigger
+            const heroTitle = document.getElementById('heroTitle');
+            heroTitle.addEventListener('animationend', (event) => {
+                if (event.animationName === 'typing') {
+                    heroTitle.style.borderRight = 'none'; // Hide cursor after typing
+                    heroTitle.classList.add('typed'); // Add class to trigger gradient shift
+                }
+            });
+        });
+    </script>
+</body>
+</html>

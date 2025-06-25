@@ -1,26 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T-Development</title>
-    <link rel="stylesheet" href="static/css/style.css" type="text/css">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link
+        <link
     rel="icon"
     href="static/images/icon.png"
     type="image/icon type"
   />
 
-    <link rel="stylesheet" type="text/css" href="static/css/nav.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.shopify.com/s/files/1/2979/3338/files/UGC-style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      slideshow-container {
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #00a1ff;
+            --dark: #0a0a14;
+            --darker: #05050c;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --bg-dark: #12121a;
+            --card-dark: #1a1a24;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        [data-theme="light"] {
+            --dark: #f8f9fa;
+            --darker: #e9ecef;
+            --light: #0a0a14;
+            --gray: #495057;
+            --bg-dark: #ffffff;
+            --card-dark: #f1f3f5;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--light);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.4);
+        }
+        
+        .navbar {
+            background-color: rgba(10, 10, 20, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+        
+        [data-theme="light"] .navbar {
+            background-color: rgba(248, 249, 250, 0.9);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary) !important;
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--light) !important;
+            margin: 0 10px;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+        }
+
+        /* Particle Canvas */
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-weight: 700;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn-neon {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn-neon:hover {
+            color: var(--dark);
+            box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary);
+        }
+        
+        .btn-neon:hover::before {
+            left: 100%;
+        }
+        
+        .btn-neon-solid {
+            background: var(--primary);
+            color: var(--dark);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: var(--transition);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+        
+        .btn-neon-solid:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+            color: var(--dark);
+        }
+        
+        .section-title {
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            border-radius: 2px;
+        }
+        
+        .about-img {
+            border-radius: 20px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: var(--transition);
+        }
+        
+        .about-img:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        .skill-card {
+            background-color: var(--card-dark);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 100%;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(0, 240, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: var(--transition);
+        }
+        
+        .skill-card:hover::before {
+            animation: shine 1.5s;
+        }
+        
+        @keyframes shine {
+            100% {
+                left: 150%;
+            }
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+        
+        .skill-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .project-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            margin-bottom: 30px;
+            background-color: var(--card-dark);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.2);
+        }
+        
+        .project-img {
+            height: 220px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+        
+        .project-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .testimonial-card {
+            background-color: var(--card-dark);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
+        }
+        
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .contact-info-card {
+            background-color: var(--card-dark);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            background-color: var(--card-dark);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            color: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(0, 240, 255, 0.25);
+            border-color: var(--primary);
+            background-color: var(--card-dark);
+            color: var(--light);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 240, 255, 0.1);
+            color: var(--primary);
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.3);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+            animation: float 15s infinite linear;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: -50px;
+            animation: float 12s infinite linear reverse;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, 50px);
+            }
+            50% {
+                transform: translate(0, 100px);
+            }
+            75% {
+                transform: translate(-50px, 50px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+        
+        .floating-img {
+            animation: imgFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes imgFloat {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+        
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+        }
+        
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .cursor, .cursor-follower {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+
+         slideshow-container {
             width: 90%;
             max-width: 1200px;
             overflow: hidden;
@@ -70,152 +575,258 @@
                 transform: translateX(-100%);
             }
         }
+/* Add to your existing CSS */
+.particle-explosion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    overflow: hidden;
+}
 
+.explosion-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particle-fall linear forwards;
+}
 
+@keyframes particle-fall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(calc(var(--random-x) * 100px)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes particle-burst {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes particle-spiral {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(100px * var(--random-x)), calc(100px * var(--random-y))) rotate(720deg) scale(0);
+        opacity: 0;
+    }
+}
     </style>
-  </head>
-  <!-- data-bs-theme="dark" -->
-  <body data-bs-theme="dark">
-
-    <!-- Navigation -->
-
-    <header>
-      <div class="container-fluid p-0" style="background-image: url(static/images/BACK.jpg); background-size: cover; background-position: center center; position: relative;">
-        <!-- Overlay for text readability -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.452); z-index: 1;"></div>
-        
-        <nav class="navbar navbar-expand-lg bg-body-secondary sticky-top border border-primary  shadow-sm py-2" style="background-color: rgba(255, 255, 255, 0.8); z-index: 2;">
-          <div class="container-fluid">
-            <a class="navbar-brand font-weight-bold" href="index.html" style="font-weight: 700;">
-              <img src="static/images/logo.png" alt="My Portfolio" style="height: 60px; width: 60px;">
-            </a>
-            <button 
-              class="navbar-toggler" 
-              type="button" 
-              data-bs-toggle="collapse" 
-              data-bs-target="#navbarNavAltMarkup" 
-              aria-controls="navbarNavAltMarkup" 
-              aria-expanded="false" 
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav ms-auto">
-                <a class="nav-link active" aria-current="page" href="index.html" >Home</a>
-                <a class="nav-link" href="about.html" >About</a>
-                <a class="nav-link" href="features.html">Features</a>
-                <a class="nav-link" href="price.html">Pricing</a>
-                <a class="nav-link" href="contact.html">Contact Me</a>
-              </div>
-            </div>
-          </div>
-        </nav>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
     
-        <div class="container text-center py-5" style="position: relative; z-index: 2;"> 
-          <div class="row justify-content-center">
-            <div class="col-md-6">
-              <img src="static/images/logo.png" alt="Profile Image" class="rounded-circle img-fluid shadow mb-4" style="width: 300px; height: 300px; object-fit: cover;border: 9px solid #4f46e5; ">
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-md-8 text-center"> 
-              <h1 class="font-weight-bold mb-3 text-light">Hello, I'm T-Development!</h1>
-              <p class="lead text-light">I turn <span class="text-primary">ideas</span> into <span class="text-success">code</span>, one line at a time.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    
-
-
-
-
-
-
-<!-- Card Slider Section -->
-<section class="slider-section py-5 bg-dark rounded-4">
-  <div class="container">
-    <h2 class="text-center fw-bold mb-5 text-light">Building Solutions</h2>
-
-    <!-- Swiper Section -->
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <!-- Card Template -->
-        <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
-            <img src="static/images/python.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Python Logo" style="width: 100px; height: 100px; object-fit: cover; border: 5px solid #4f46e5;">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold">Python</h5>
-              <p class="card-text text-muted">A versatile language used in web development, data science, and automation.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
-            <img src="static/images/java.svg" class="card-img-top rounded-circle mx-auto mt-4" alt="Java Logo" style="width: 100px; height: 100px; object-fit: cover; border: 5px solid #4f46e5;">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold">Java</h5>
-              <p class="card-text text-muted">A powerful object-oriented language widely used for building enterprise solutions.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
-            <img src="static/images/javascript.png " class="card-img-top rounded-circle mx-auto mt-4" alt="JavaScript Logo" style="width: 100px; height: 100px; object-fit: cover; border: 5px solid #4f46e5;">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold">JavaScript</h5>
-              <p class="card-text text-muted">The language of the web, powering dynamic websites and modern web apps.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
-            <img src="static/images/html.png" class="card-img-top rounded-circle mx-auto mt-4" alt="HTML Logo" style="width: 100px; height: 100px; object-fit: cover;border: 5px solid #4f46e5;">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold">HTML</h5>
-              <p class="card-text text-muted">The standard markup language for creating web pages and web applications.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
-            <img src="static/images/flutter.png" class="card-img-top rounded-circle mx-auto mt-4" alt="Flutter Logo" style="width: 100px; height: 100px; object-fit: cover;border: 5px solid #4f46e5;">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold">Flutter</h5>
-              <p class="card-text text-muted">A UI toolkit for building cross-platform apps from a single codebase.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="card h-100 text-center border-0 shadow" style="border-radius: 40px;">
-            <img src="static/images/Bootstrap_logo.svg.png" class="card-img-top rounded-circle mx-auto mt-4" alt="Bootstrap Logo" style="width: 100px; height: 100px; object-fit: cover;border: 5px solid #4f46e5;">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold">Bootstrap</h5>
-              <p class="card-text text-muted">A CSS framework for building responsive and modern web interfaces.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Swiper Navigation -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
     </div>
-  </div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">T-Development</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="features.html">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Work</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="price.html">Price</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <section class="hero-section" id="home">
+        <canvas id="particle-canvas"></canvas> <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h6 class="text-primary mb-3">HELLO, I'M T-DEVELOPMENT</h6>
+                    <h1 class="hero-title">Full-Stack Developer</h1>
+                    <p class="hero-subtitle">I turn ideas into code, one line at a time.</p>
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+                        <a href="#projects" class="btn btn-neon-solid">View My Work</a>
+                        <a href="#contact" class="btn btn-neon">Hire Me</a>
+                        <!-- <button id="particleMagic" class="btn btn-neon">✨ Particle Magic ✨</button> -->
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="static/images/back.jpg" alt="Developer" class="img-fluid rounded-3 floating-img">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-5" id="about">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <img src="static/images/thabo.jpg" alt="About" class="img-fluid about-img">
+                </div>
+                <div class="col-lg-7">
+                    <h6 class="text-primary mb-3">ABOUT ME</h6>
+                    <h2 class="section-title mb-4">Hi, I'm Thabo Mokoinihi</h2>
+                    <p class="mb-4">I completed my studies in software engineering, with a focus on systems development, at WeThinkCode.
+                         This intensive program provided me with a solid foundation in computer science principles, algorithms, and data structures, as well as hands-on experience in software development, problem-solving, and teamwork.
+                          At WeThinkCode, I had the opportunity to work on complex projects that allowed me to develop a strong understanding of programming languages such as Python, Flutter/Dart, and Java. <br><br>
+                         The program emphasized practical application, where I worked collaboratively with peers to design, build, and maintain scalable software systems.
+                          My graduation from WeThinkCode marked a significant milestone in my career, where I gained not only technical expertise but also the critical soft skills required to excel in the tech industry.
+                           I am always eager to learn and adapt to new technologies, and I strive to apply my knowledge to create innovative, efficient solutions that address real-world challenges.
+                    
+                    </p>
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fas fa-check-circle text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Clean Code</h5>
+                                    <p class="mb-0 text-light">Well-structured and documented</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fas fa-check-circle text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Responsive Design</h5>
+                                    <p class="mb-0 text-light">Works on all devices</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fas fa-check-circle text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Fast Delivery</h5>
+                                    <p class="mb-0 text-light">Quick turnaround times</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fas fa-check-circle text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">SEO Optimized</h5>
+                                    <p class="mb-0 text-light">Better search rankings</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-wrap gap-3">
+                        <!-- <a href="#" class="btn btn-neon-solid"><i class="fas fa-download me-2"></i>Download CV</a> -->
+                        <a href="#contact" class="btn btn-neon">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-5" id="skills">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h6 class="text-primary mb-3">MY SKILLS</h6>
+                    <h2 class="section-title mb-5">What I'm Excellent At</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Frontend Development</h3>
+                        <p>Creating beautiful, responsive interfaces with React, Vue, and modern CSS frameworks.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> HTML5 & CSS3</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> JavaScript/TypeScript</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Bootstrap</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Backend Development</h3>
+                        <p>Building robust APIs and server-side applications with Node.js and Python.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Python & Flask</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Python & Django</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> REST & GraphQL</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Development</h3>
+                        <p>Developing cross-platform mobile apps with React Native and Flutter.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> React Native</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Flutter</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Progressive Web Apps</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
- </div>
-</section>
-
-<div class="container">
-
-  <div class="slideshow-container">
+    <!-- <div class="container text-center">
+        <h2 class="section-title mb-5 ">My Tools</h2>
+  <div class="slideshow-containe pb-5">
 
     <div class="slideshow">
         <div class="slide">
@@ -243,7 +854,6 @@
           <p class="text-light">Bootstrap</p>
       </div>
         
-        <!-- Repeat slides to create infinite scroll illusion -->
         <div class="slide">
           <img src="static/images/python.svg" alt="Brand 1">
           <p class="text-light">Python programming Language</p>
@@ -269,7 +879,6 @@
         <p class="text-light">Bootstrap</p>
     </div>
 
-     <!-- Repeat slides to create infinite scroll illusion -->
      <div class="slide">
       <img src="static/images/python.svg" alt="Brand 1">
       <p class="text-light">Python programming Language</p>
@@ -298,159 +907,505 @@
     </div>
 
 
-</div>
-
-
-<!-- Swiper Styles and Script -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-<!-- Swiper Configuration -->
-<script>
-  const swiper = new Swiper('.mySwiper', {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    loop: true,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      576: { slidesPerView: 1 },
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 },
-    },
-  });
-</script>
-
+</div> -->
     
-
+    <section class="py-5 bg-dark" id="projects">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h6 class="text-primary mb-3">MY WORK</h6>
+                    <h2 class="section-title mb-5">Recent Projects</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <div class="position-relative overflow-hidden">
+                            <img src="static/images/ds.png" alt="Project 1" class="img-fluid project-img">
+                            <span class="project-badge">Bootstrap</span>
+                        </div>
+                        <div class="p-4">
+                            <h4>Durable Stitch (Pty) Ltd</h4>
+                            <p class="text-light">A website for a printing and branding company based in South Africa.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="https://durablestitch.com" class="text-primary">Visit<i class="fas fa-arrow-right ms-2"></i></a>
+                                <a href="https://durablestitch.com" class="text-muted"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <div class="position-relative overflow-hidden">
+                            <img src="static/images/ds-logo.png" alt="Project 2" class="img-fluid project-img">
+                            <span class="project-badge">JavaScript & More</span>
+                        </div>
+                        <div class="p-4">
+                            <h4>DS Design Studio</h4>
+                            <p class="text-light">A web application that will allow user's to design business card, posters and more right on the web.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="https://durablestitch.com.design-space" class="text-primary">Visit<i class="fas fa-arrow-right ms-2"></i></a>
+                                <a href="https://durablestitch.com.design-space" class="text-muted"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <div class="position-relative overflow-hidden">
+                            <img src="static/images/ds-E.png" alt="Project 3" class="img-fluid project-img">
+                            <span class="project-badge">Python</span>
+                        </div>
+                        <div class="p-4">
+                            <h4>DurableStitch Online Store</h4>
+                            <p class="text-light">A online clothing store with intergrated design space for cutomers to design and order their custom apparel.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="https://durablestitch.store" class="text-primary">Visit<i class="fas fa-arrow-right ms-2"></i></a>
+                                <a href="https://durablestitch.store" class="text-muted"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <div class="position-relative overflow-hidden">
+                            <img src="static/images/logo_m.png" alt="Project 3" class="img-fluid project-img">
+                            <span class="project-badge">Bootstrap & JavaScript</span>
+                        </div>
+                        <div class="p-4">
+                            <h4>MATJIPA BRICKYARD</h4>
+                            <p class="text-light">A website for a brick manufacturing company with intergrated whatsapp feature.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="https://matjipabrickyard.co.za/" class="text-primary">Visit <i class="fas fa-arrow-right ms-2"></i></a>
+                                <a href="https://matjipabrickyard.co.za/" class="text-muted"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <div class="position-relative overflow-hidden">
+                            <img src="static/images/africa.png" alt="Project 3" class="img-fluid project-img">
+                            <span class="project-badge">Python</span>
+                        </div>
+                        <div class="p-4">
+                            <h4>AficaHolidayHome</h4>
+                            <p class="text-light">A web application that allows users to check room availability, book and pay online, with an admin page for managing bookings.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="https://africaholidayhome.co.za/" class="text-primary">View Details <i class="fas fa-arrow-right ms-2"></i></a>
+                                <a href="https://africaholidayhome.co.za/" class="text-muted"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-neon">More Cooming Soon</a>
+            </div>
+        </div>
+    </section>
     
-
-
-  
-
-
-
-
-
-<section id="projects" class="py-5">
-  <div class="container" >
-    <h2 class="text-center fw-bold mb-5 text-light" >My Previous Projects</h2>
-    <div class="row ">
-      <!-- Project 1 -->
-      <div class="col-md-4 mb-4" >
-        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
-          <img src="static/images/ds-E.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5;">
-          <div class="card-body">
-            <h5 class="card-title text-center">DurableStitch Online Store</h5>
-            <p class="card-text text-center">A web application that lets users upload, customize, and preview T-shirt designs in 3D..</p>
-            <p class="text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript, Python, Flask, SQLAlchemy</p>
-            <a href="https://durablestitch.store" class="btn btn-primary justify-content-center d-flex">View Project</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 2 -->
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
-          <img src="static/images/bono.webp"class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5;">
-          <div class="card-body">
-            <h5 class="card-title text-center">Bonovitta Business Solutions (pty) ltd</h5>
-            <p class="card-text text-center">Short description of the project. Highlight the main features or goals.</p>
-            <p class="text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
-            <a href="https://bonovitta.netlify.app" class="btn btn-primary justify-content-center d-flex">View Project</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 3 -->
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
-          <img src="static/images/africa.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5; ">
-          <div class="card-body">
-            <h5 class="card-title text-center">AficaHolidayHome</h5>
-            <p class="card-text text-center"> A web application that allows users to check room availability, book and pay online, with an admin page for managing bookings.</p>
-            <p class="text-muted"><strong>Technologies:</strong> Python, Flask, Html, css, JavaScript, bootstrap</p>
-            <a href="https://africaholidayhome.co.za" class="btn btn-primary justify-content-center d-flex">View Project</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
-          <img src="static/images/ds.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;border: 5px solid #4f46e5;">
-          <div class="card-bodytext-center">
-            <h5 class="card-title text-center">DurableStitch (pyt) ltd</h5>
-            <p class="card-text text-center">A printing company specializing in clothing, branding and promotional products.</p>
-            <p class="text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
-            <a href="https://durable-stitch.co.za" class="btn btn-primary justify-content-center d-flex">View Project</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm" style="border-radius: 60px;">
-            <img src="static/images/logo.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail"
-                style="width: 140px; height: 140px; object-fit: cover; border: 5px solid #4f46e5;">
-            <div class="card-body text-center">
-                <h5 class="card-title">T-Convertor</h5>
-                <p class="card-text">A web app that focuses on document manipulation like converting images to PDF, PDF to DOCX, etc.</p>
-                <p class="text-muted"><strong>Technologies:</strong> Python, Flask, HTML, CSS, JavaScript</p>
-                <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
-                        View Project
-                    </button>
+    <!-- <section class="py-5" id="testimonials">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h6 class="text-primary mb-3">TESTIMONIALS</h6>
+                    <h2 class="section-title mb-5">What Clients Say</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Client" class="testimonial-img mx-auto d-block">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-quote-left text-primary"></i>
+                        </div>
+                        <p class="text-center mb-4">"Alex delivered our project ahead of schedule with exceptional quality. His attention to detail and communication were outstanding."</p>
+                        <h5 class="text-center mb-1">Sarah Johnson</h5>
+                        <p class="text-center text-muted">CEO, TechSolutions</p>
+                        <div class="text-center mt-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client" class="testimonial-img mx-auto d-block">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-quote-left text-primary"></i>
+                        </div>
+                        <p class="text-center mb-4">"Working with Alex was a game-changer for our business. He understood our needs perfectly and created a solution that exceeded expectations."</p>
+                        <h5 class="text-center mb-1">Michael Chen</h5>
+                        <p class="text-center text-muted">Founder, StartupX</p>
+                        <div class="text-center mt-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="testimonial-img mx-auto d-block">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-quote-left text-primary"></i>
+                        </div>
+                        <p class="text-center mb-4">"Reliable, professional, and highly skilled. Alex is our go-to developer for all web projects. Highly recommended!"</p>
+                        <h5 class="text-center mb-1">Emily Rodriguez</h5>
+                        <p class="text-center text-muted">CTO, CreativeHub</p>
+                        <div class="text-center mt-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section> -->
     
-    <!-- Modal -->
-    <div class="modal fade" id="comingSoonModal" tabindex="-1" aria-labelledby="comingSoonModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-center">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="comingSoonModalLabel">Coming Soon!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <section class="py-5 bg-dark" id="contact">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h6 class="text-primary mb-3">CONTACT ME</h6>
+                    <h2 class="section-title mb-5">Get In Touch</h2>
                 </div>
-                <div class="modal-body">
-                    <img src="static/images/logo.png" alt="Coming Soon" style="width: 100px;">
-                    <p class="mt-3">This feature is under development. Stay tuned!</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="contact-info-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h4>Email Me</h4>
+                                <p class="text-light">mokoinihithabo@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-info-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <h4>Call Me</h4>
+                                <p class="text-light">+27 75 004-1612</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-info-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h4>Visit Me</h4>
+                                <p class="text-light">Germiston, South Africa</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <form class="p-4 p-md-5 bg-card-dark rounded-3 shadow-lg">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control" placeholder="Subject" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-neon-solid">Send Message</button>
+                            </div>
+                        </div>
+                    </form> -->
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     
-      <!-- <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
-          <img src="static/images/bono.webp" class="card-img-top rounded-circle mx-auto mt-3" alt="Project 1 Thumbnail" style="width: 140px; height: 140px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title">Bonovitta Business Solutions pty</h5>
-            <p class="card-text text-center">Short description of the project. Highlight the main features or goals.</p>
-            <p class="text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
-            <a href="project2-link.html" class="btn btn-primary">View Project</a>
-          </div>
+    <footer>
+        <div class="container text-center">
+            <a href="#" class="footer-logo">T-Development</a>
+            <p class="mt-3">&copy; 2025 T-Development. All rights reserved.</p>
+            <div class="social-icons mt-4">
+                <a href="https://www.linkedin.com/in/thabo-mokoinihi" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/meshackMokoinihi" class="social-icon"><i class="fab fa-github"></i></a>
+                <!-- <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a> -->
+            </div>
         </div>
-      </div> -->
-    </div>
-  </div>
-</section>
-
-
-
-    <footer class="bg-dark text-light text-center py-3">
-      <div class="container">
-        <p class="mb-0">&copy; 2024 Thabo Mokoinihi. All rights reserved.</p>
-      </div>
     </footer>
-    
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script src="static/javascript/script.js"></script>
-    <script src="static/javascript/slider.js"></script>
 
-  </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Theme Toggle
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.body.dataset.theme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+            this.innerHTML = document.body.dataset.theme === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        window.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorFollower.style.left = e.clientX + 'px';
+            cursorFollower.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, .theme-toggle, .skill-card, .project-card, .testimonial-card, .contact-info-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(0)';
+                cursorFollower.style.width = '60px';
+                cursorFollower.style.height = '60px';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorFollower.style.width = '40px';
+                cursorFollower.style.height = '40px';
+            });
+        });
+
+        // Particle Animation for Hero Section
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const maxParticles = 100;
+        let mouse = { x: null, y: null, radius: 100 };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.querySelector('.hero-section').offsetHeight; // Match hero section height
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            update() {
+                // Check if particle is still within the canvas
+                if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+                    this.directionY = -this.directionY;
+                }
+
+                this.x += this.directionX;
+                this.y += this.directionY;
+
+                // Interactivity: check distance to mouse
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius + this.size) {
+                        if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+                            this.x += 10;
+                        }
+                        if (mouse.x > this.x && this.x > this.size * 10) {
+                            this.x -= 10;
+                        }
+                        if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+                            this.y += 10;
+                        }
+                        if (mouse.y > this.y && this.y > this.size * 10) {
+                            this.y -= 10;
+                        }
+                    }
+                }
+
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < maxParticles; i++) {
+                let size = (Math.random() * 5) + 1; // Particle size between 1 and 6
+                let x = Math.random() * (canvas.width - size * 2) + size;
+                let y = Math.random() * (canvas.height - size * 2) + size;
+                let directionX = (Math.random() * 0.5) - 0.25; // Speed between -0.25 and 0.25
+                let directionY = (Math.random() * 0.5) - 0.25;
+                let color = 'rgba(0, 240, 255, ' + (Math.random() * 0.3 + 0.05) + ')'; // Semi-transparent primary color
+                particles.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear entire canvas
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+            }
+
+            // Draw lines between close particles
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let distance = Math.sqrt(((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)) +
+                        ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y)));
+                    if (distance < 100) {
+                        ctx.strokeStyle = 'rgba(0, 240, 255, ' + (1 - (distance / 100)) * 0.2 + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Initialize and start animation
+        initParticles();
+        animateParticles();
+
+        // Particle Magic Button
+document.getElementById('particleMagic').addEventListener('click', function() {
+    // Create container for explosion
+    const explosion = document.createElement('div');
+    explosion.className = 'particle-explosion';
+    document.body.appendChild(explosion);
+    
+    // Create 3 different types of particle effects that run simultaneously
+    createFallingParticles(explosion);
+    createBurstEffect(explosion);
+    createSpiralEffect(explosion);
+    
+    // Remove the explosion after 15 seconds
+    setTimeout(() => {
+        explosion.remove();
+    }, 15000);
+});
+
+function createFallingParticles(container) {
+    // Create 200 falling particles
+    for (let i = 0; i < 200; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'explosion-particle';
+        
+        // Random properties
+        const size = Math.random() * 10 + 5;
+        const posX = Math.random() * window.innerWidth;
+        const duration = Math.random() * 5 + 10;
+        const delay = Math.random() * 5;
+        const color = `hsl(${Math.random() * 60 + 180}, 100%, 50%)`; // Blue/cyan colors
+        
+        // Apply properties
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}px`;
+        particle.style.top = `-20px`;
+        particle.style.backgroundColor = color;
+        particle.style.boxShadow = `0 0 ${size}px ${size/2}px ${color}`;
+        particle.style.setProperty('--random-x', (Math.random() * 2 - 1));
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        container.appendChild(particle);
+    }
+}
+
+function createBurstEffect(container) {
+    // Create a central burst effect
+    const burstParticles = 100;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    
+    for (let i = 0; i < burstParticles; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'explosion-particle';
+        
+        // Random properties
+        const size = Math.random() * 15 + 5;
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 200 + 50;
+        const color = `hsl(${Math.random() * 60 + 180}, 100%, 50%)`; // Blue/cyan colors
+        
+        // Apply properties
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${centerX}px`;
+        particle.style.top = `${centerY}px`;
+        particle.style.backgroundColor = color;
+        particle.style.boxShadow = `0 0 ${size}px ${size/2}px ${color}`;
+        particle.style.animation = `particle-burst 2s ease-out forwards`;
+        particle.style.setProperty('--random-x', Math.cos(angle) * distance);
+        particle.style.setProperty('--random-y', Math.sin(angle) * distance);
+        
+        container.appendChild(particle);
+    }
+}
+
+function createSpiralEffect(container) {
+    // Create a spiral effect
+    const spiralParticles = 150;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    
+    for (let i = 0; i < spiralParticles; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'explosion-particle';
+        
+        // Random properties
+        const size = Math.random() * 8 + 3;
+        const angle = (i / spiralParticles) * Math.PI * 4;
+        const distance = (i / spiralParticles) * 300;
+        const color = `hsl(${Math.random() * 60 + 180}, 100%, 50%)`; // Blue/cyan colors
+        const duration = Math.random() * 3 + 7;
+        const delay = (i / spiralParticles) * 2;
+        
+        // Apply properties
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${centerX}px`;
+        particle.style.top = `${centerY}px`;
+        particle.style.backgroundColor = color;
+        particle.style.boxShadow = `0 0 ${size}px ${size/2}px ${color}`;
+        particle.style.animation = `particle-spiral ${duration}s ease-in-out ${delay}s forwards`;
+        particle.style.setProperty('--random-x', Math.cos(angle));
+        particle.style.setProperty('--random-y', Math.sin(angle));
+        
+        container.appendChild(particle);
+    }
+}
+    </script>
+</body>
 </html>
